@@ -6,13 +6,7 @@ module.exports = {
       version: '16.4.2',
     },
   },
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+  parserOptions: 'babel-eslint',
   env: {
     node: true,
   },

@@ -6,7 +6,7 @@ module.exports = {
       version: '16.4.2',
     },
   },
-  parserOptions: 'babel-eslint',
+  parser: 'babel-eslint',
   env: {
     node: true,
   },

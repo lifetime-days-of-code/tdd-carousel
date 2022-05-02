@@ -1,8 +1,9 @@
 import React from 'react';
 import CarouselButton from './CarouselButton';
 import CarouselSlide from './CarouselSlide';
-
+import PropTypes from 'prop-types';
 class Carousel extends React.PureComponent {
+
   static propTypes = {
     slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
       .isRequired,

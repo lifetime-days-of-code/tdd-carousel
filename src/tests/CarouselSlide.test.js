@@ -15,6 +15,14 @@ describe('CarouselSlide', () => {
     );
   });
 
+  it('renders correctly', () => {
+    wrapper.setProps({
+      description: 'Description',
+      attribution: 'Attribution',
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders a <figure>', () => {
     expect(wrapper.type()).toBe('figure');
   });
@@ -53,7 +61,6 @@ describe('CarouselSlide', () => {
     expect(wrapper.prop('onClick')).toBe(onClick);
     expect(wrapper.prop('className')).toBe(className);
   });
-
 });
 
 describe('Img', () => {
@@ -65,6 +72,10 @@ describe('Img', () => {
     mounted = mount(<Img src={imgUrl} imgHeight={500} objectFit="cover" />);
   });
 
+  it('renders correctly', () => {
+    expect(mounted.find('img')).toMatchSnapshot();
+  });
+  
   it('renders an <img> with the given src', () => {
     expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true);
   });

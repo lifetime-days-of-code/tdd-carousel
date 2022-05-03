@@ -10,6 +10,7 @@ class Carousel extends React.PureComponent {
   };
 
   static defaultProps = {
+    defaultImg: CarouselSlide.defaultProps.Img,
     defaultImgHeight: CarouselSlide.defaultProps.imgHeight,
   };
 
@@ -32,10 +33,11 @@ class Carousel extends React.PureComponent {
   };
 
   render() {
-    const { defaultImgHeight, slides, ...rest } = this.props;
+    const { defaultImg, defaultImgHeight, slides, ...rest } = this.props;
     return (
       <main {...rest}>
         <CarouselSlide
+          Img={defaultImg}
           imgHeight={defaultImgHeight}
           {...slides[this.state.slideIndex]}
         />

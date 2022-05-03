@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint:js": "eslint . && prettier-eslint --list-different **/*.js", 
+    "lint:js": "eslint . && prettier-eslint --list-different **/*.js",
     "lint:css": "stylelint **/*.js",
     "lint": "npm run lint:js && npm run lint:css",
     "format": "prettier-eslint --write **/*.js",
@@ -18,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.2.0",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",

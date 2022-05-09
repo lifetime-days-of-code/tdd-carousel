@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Carousel, { Carousel as CoreCarousel } from '../Carousel';
 import CarouselButton from '../CarouselButton';
 import CarouselSlide from '../CarouselSlide';
@@ -75,26 +75,24 @@ describe('Carousel', () => {
       ...CarouselSlide.defaultProps,
       ...slides[0],
     });
- 
+
     wrapper.setProps({ slideIndex: 1 });
     slideProps = wrapper.find('CarouselSlide').props();
     expect(slideProps).toEqual({
       ...CarouselSlide.defaultProps,
       ...slides[1],
     });
-     
   });
 
   it('decrements `slideIndex` when Prev is clicked', () => {
     wrapper.find('[data-action="prev"]').simulate('click');
     expect(slideIndexDecrement).toHaveBeenCalledWith(slides.length);
-  })
+  });
 
-  
   it('increment `slideIndex` when Next is clicked', () => {
     wrapper.find('[data-action="next"]').simulate('click');
     expect(slideIndexIncrement).toHaveBeenCalledWith(slides.length);
-  })
+  });
   it('passes defaultImg and defaultImgHeight to the CarouselSlide', () => {
     const defaultImg = () => 'test';
     const defaultImgHeight = 1234;
@@ -154,6 +152,12 @@ describe('Carousel', () => {
       wrapper = shallow(<Carousel slide={slides} />);
     });
 
+    it('allows `slideIndex` to be controlled', () => {
+      const mounted = mount(<Carousel slides={slides} slideIndex={1} />);
+      expect(mounted.find(CoreCarousel).prop('slideIndex')).toBe(1);
+      mounted.setProps({ slideIndex: 0 });
+      expect(mounted.find(CoreCarousel).prop('slideIndex')).toBe(0);
+    });
     it('set slideIndex={0} on the core component', () => {
       expect(wrapper.find(CoreCarousel).prop('slideIndex')).toBe(0);
     });

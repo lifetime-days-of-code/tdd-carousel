@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Carousel from '../Carousel';
+import Carousel, { Carousel as CoreCarousel } from '../Carousel';
 import CarouselButton from '../CarouselButton';
 import CarouselSlide from '../CarouselSlide';
 
@@ -69,19 +69,32 @@ describe('Carousel', () => {
 
   it('renders the current slide as a CarouselSlide', () => {
     let slideProps;
+
     slideProps = wrapper.find(CarouselSlide).props();
     expect(slideProps).toEqual({
       ...CarouselSlide.defaultProps,
       ...slides[0],
     });
-    wrapper.setState({ slideIndex: 1 });
+ 
+    wrapper.setProps({ slideIndex: 1 });
     slideProps = wrapper.find('CarouselSlide').props();
     expect(slideProps).toEqual({
       ...CarouselSlide.defaultProps,
       ...slides[1],
     });
+     
   });
 
+  it('decrements `slideIndex` when Prev is clicked', () => {
+    wrapper.find('[data-action="prev"]').simulate('click');
+    expect(slideIndexDecrement).toHaveBeenCalledWith(slides.length);
+  })
+
+  
+  it('increment `slideIndex` when Next is clicked', () => {
+    wrapper.find('[data-action="next"]').simulate('click');
+    expect(slideIndexIncrement).toHaveBeenCalledWith(slides.length);
+  })
   it('passes defaultImg and defaultImgHeight to the CarouselSlide', () => {
     const defaultImg = () => 'test';
     const defaultImgHeight = 1234;
@@ -132,5 +145,25 @@ describe('Carousel', () => {
       wrapper.find('[data-action="next"]').simulate('click');
       expect(wrapper.state('slideIndex')).toBe(0);
     });
+  });
+
+  describe('Component with HOC', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<Carousel slide={slides} />);
+    });
+
+    it('set slideIndex={0} on the core component', () => {
+      expect(wrapper.find(CoreCarousel).prop('slideIndex')).toBe(0);
+    });
+
+    it('passes `slides` down to the core component', () => {
+      expect(wrapper.find(CoreCarousel).prop('slides')).toBe(slides);
+    });
+  });
+
+  describe('Core component', () => {
+    // Test against CoreCarousel will go here
   });
 });

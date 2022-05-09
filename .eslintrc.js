@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
     'comma-dangle': ['error', 'always-multiline'],
+    'no-unsaved-vars': ['error', { varsIgnorePattern: '^_' }],
   },
 };

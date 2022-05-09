@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import CarouselButton from './CarouselButton';
 import CarouselSlide from './CarouselSlide';
 import HasIndex from './HasIndex';
+import AutoAdvances from './AutoAdvances';
+
 export class Carousel extends React.PureComponent {
   static propTypes = {
-    defaultImg: Carousel.propTypes.Img,
+    defaultImg: CarouselSlide.propTypes.Img,
     defaultImgHeight: CarouselSlide.propTypes.imgHeight,
     slideIndex: PropTypes.number.isRequired,
     slideIndexDecrement: PropTypes.func.isRequired,
@@ -17,10 +19,6 @@ export class Carousel extends React.PureComponent {
   static defaultProps = {
     defaultImg: CarouselSlide.defaultProps.Img,
     defaultImgHeight: CarouselSlide.defaultProps.imgHeight,
-  };
-
-  state = {
-    slideIndex: 0,
   };
 
   handlePrevClick = () => {
@@ -44,7 +42,7 @@ export class Carousel extends React.PureComponent {
       ...rest
     } = this.props;
     return (
-      <main {...rest}>
+      <div {...rest}>
         <CarouselSlide
           Img={defaultImg}
           imgHeight={defaultImgHeight}
@@ -56,12 +54,16 @@ export class Carousel extends React.PureComponent {
         <CarouselButton data-action="next" onClick={this.handleNextClick}>
           Next
         </CarouselButton>
-      </main>
+      </div>
     );
   }
 }
 
+// START:export
+// START_HIGHLIGHT
 export default HasIndex(
-  AutoAdvance(Carousel, 'slideIndex', 'slides'),
+  AutoAdvances(Carousel, 'slideIndex', 'slides'),
   'slideIndex'
 );
+// END_HIGHLIGHT
+// END:export

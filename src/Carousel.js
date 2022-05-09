@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CarouselButton from './CarouselButton';
 import CarouselSlide from './CarouselSlide';
 import HasIndex from './HasIndex';
+
 export class Carousel extends React.PureComponent {
   static propTypes = {
     defaultImg: Carousel.propTypes.Img,
